@@ -1,0 +1,32 @@
+<html>
+		<body>
+		<div id="mydiv">
+			
+		</div>
+
+		<button id="button1" type="button" onclick="myfunction()">Add Note</button>
+		<textarea id="mytextarea">
+	
+		</textarea>
+	</body>
+		<script>
+		var parentDiv=document.getElementById("mydiv");
+		function myfunction(){
+			console.log(event);
+			var text=document.getElementById("mytextarea").value;
+			var puttext='<p id="para" onclick="deleteTodo();">'+text+'</p>';
+			parentDiv.innerHTML+=puttext;
+			var p=document.getElementById("para");
+			//console.log(p);
+
+		}
+		function deleteTodo(){
+				console.log(event.target);
+				parentDiv.removeChild(event.target);
+				//alert("moot!");
+				//document.getElementById.remove();
+			}
+		 
+		
+	</script>
+</html>

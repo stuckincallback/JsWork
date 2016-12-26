@@ -1,0 +1,35 @@
+<html>
+	
+	<body>
+	
+	</body>
+	<script>
+	var url='http://api.football-data.org/v1/competitions';
+			var xhttp=new XMLHttpRequest();
+			
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+				
+					movieData = JSON.parse(xhttp.responseText);
+					console.log(movieData);
+				}
+			};
+			xhttp.open("GET",url,true);
+			xhttp.send();
+	
+	/*	var url='http://www.api.football-data.org/v1/competitions';
+		var footballData='';
+		var xhttp=new XMLHttpRequest();
+		xhttp.onreadystatechange=function(){
+			if(this.readyState==4&&this.status==200){
+				footballData=JSON.parse(xhttp.responseText);
+				console.log(footballData);
+			}
+			
+		};
+		xhttp.open('GET',url,true);
+		xhttp.send();
+	*/	
+	console.log('Hello');
+	</script>
+</html>

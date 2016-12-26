@@ -1,0 +1,79 @@
+<html>
+		<body id="body">
+	
+		<div id="searchBarDiv">
+			<input type="text" id="searchBar" onchange="getText();"> </input>
+		</div>
+		<div id="content" >
+		</div>
+	    </body>
+	<script>
+		var search=document.getElementById("searchBar");
+		var name='';
+		var movieData;
+		function getText(){
+			name=search.value;
+			//console.log(search.value);
+			var url='https://tv-v2.api-fetch.website/movies/1?sort=last%20added&order=1&keywords='+name;
+			var xhttp=new XMLHttpRequest();
+			//console.log(xhttp);
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+				   // Typical action to be performed when the document is ready:
+				   //console.log(xhttp.responseText);
+					movieData = JSON.parse(xhttp.responseText);
+					//console.log(movieData);
+					
+					
+					if(typeof movieData!=='undefined' && movieData.length != 0)
+					{
+						content.innerHTML = '';
+						for(var i=0;i<movieData.length;i++)
+						{
+							var title=movieData[i].title;
+							var image=movieData[i].images.poster;
+							var banner=movieData[i].images.banner;
+							var imdbid=movieData[i].imdb_id;
+							var synopsis=movieData[i].synopsis;
+							var year=movieData[i].year;
+							var runtime=movieData[i].runtime;
+							skeleton(image,banner,title,imdbid,synopsis,year,runtime);
+							console.log(banner);
+						}
+					} else {
+						content.innerHTML = "No Movies Available or some error occoured";
+					}
+				  			   //var contentDiv = 
+				}
+			};
+			xhttp.open("GET",url,true);
+			xhttp.send();
+		}
+			
+		function addInfo(image,title,imdbid,synopsis,year,runtime)
+		{
+				
+		}
+		function skeleton(image,banner,title,imdbid,synopsis,year,runtime){
+			var content=document.getElementById('content');
+			
+			var htmlCode='<div id="mainDiv"> \
+			<div id="imageDiv">\
+			<img src="'+banner+' width"200" height="300"></img>\
+			</div>\
+			<div id="infoDiv">\
+				<p id="title"><lable>Title:-</lable>'+title+'</p></br>\
+				<p id="imdbid"><lable>imdbid:-</lable>'+imdbid+'</p></br>\
+				<p id="synopsis"><lable>synopsis:-</lable>'+synopsis+'</p></br>\
+				<p id="year"><lable>year:-</lable>'+year+'</p></br>\
+				<p id="runtime"><lable>runtime:-</lable>'+runtime+'</p></br>\
+			<div>\
+		</div>\
+		';
+		//console.log(htmlCode)
+	
+			content.innerHTML+=htmlCode;
+			
+		}
+	</script>	
+</html>
